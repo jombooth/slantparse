@@ -1,0 +1,102 @@
+Title of your project proposal: 
+
+Using Machine Learning to Determine the Unstated Political Leanings of Satirical News Publications
+
+Background and Motivation
+Discuss your motivations and reasons for choosing this project, especially any background or research interests that may have influenced your decision: 
+
+One of the reasons that we have selected this project is that we, the authors of this project, have a small amount of experience with the mode of data collection which we intend to use in the project. In the past, we have started a project in which we used an email scraper to search Harvard student house lists for emails which pertained to any given student event. That project, called Harvard Events, also involved an exploration of natural language processing, whereby we attempted to figure out information about an event from the text of an email about it - like what student group was hosting the event, where it was being held, what time it was being held, etc. - and use this information to generate a table of easy to find events. 
+
+For our project 'Using Machine Learning to Determine the Political Leanings of Satirical News Publications', we will use some of the same techniques as we explored in Harvard Events, and thus this familiarity is one of our motivations for choosing this project topic. Our project will use a web scraper, which we have experience with, as well as language processing. The nature of language processing is much more complex in this case than in the past Harvard Events project as instead of having a lookup table for relevant phrases, we will instead be processing the language of the texts to search for features that reveal the political leanings of their authors (and, by extension via majority vote, the publication). 
+
+Further, this project caters to our curiosity and interests. The project caters to our curiosity in that we are genuinely interested in confirming our hypothesis that satirical news organizations often have a liberal slant. The project caters to our interests as the project’s inclusion of machine learning in conjunction with language processing is very appealing to us. This project includes a lot of our learning goals, including learning to predict an author’s political orientation merely by parsing natural language. 
+
+Project Objectives 
+What are the scientific and inferential goals for this project? What would you like to learn and accomplish? List the benefits:
+
+We have a hypothesis and want to use data science to test it. Our hypothesis is that satirical news organizations, which frequently claim to be “neutral” in terms of their politics, actually have a strong political slant. We conjecture, for example, that this is true of The Onion, among many other popular websites. This hypothesis lends us to the main scientific goal for this project: we want to be able to give our model a corpus of text from any given news/satirical news website, and to have it predict the political leanings of that website.
+
+In order for us to test this hypothesis, we’re going to need to scrape a great deal of text from the websites of interests and delve into language processing as our means of feature learning. We hope to learn a lot from this process; ideally, we’ll develop a very efficient methodology for gathering texts from the websites of interests, and we’ll create a model of classifying articles with a political leaning from our application of language processing. Once we have written our web scrapers and created this model using language processing, we wager that we will have learned a lot in the process. Thus, learning about data scraping is one of our learning goals, and learning more about language processing is another one of our goals. 
+
+Must-Have Features 
+These are features or calculations without which you would consider your project to be a failure:
+
+In order for our project to be successful, we want to determine if it’s possible to assign a political orientation to any given news article. In order for us to achieve this, we need a web scraper which is able to read the given news article, and we will need to consider the key characteristics of a large number of news articles with known political orientations. These components are truly the core of our project. 
+
+If our hypothesis is correct and conservatives and liberals do indeed use different language in reporting, we would then need to build a classification model; without this, our project would be unsuccessful. This classification model should use the key characteristics to assign a political orientation to any given news article, as our hypothesis states should be possible. 
+
+Having collected the data and applied the model, we then will need to check the success of our classification. To do this, we plan to apply our model to some news articles which have a known orientation, but which we have not used in determining the key characteristics. 
+
+Optional Features
+Those features or calculations which you consider would be nice to have, but not critical.: 
+
+We would like to be able to verify the results of our classification, even if we do not use it on a news article with a known political leaning. To achieve this, we hope to be able to investigate the author of the article’s background and determine if they have recently worked for an organization with a political leaning. We are unsure of how to computationally implement this, but think it would be a really neat feature to include. It would be great for verification of our results. Thus we think this feature would be nice to have, but is not strictly necessary so long as we can demonstrate the efficacy of our classification model on data with known political bias. 
+
+What Data? 
+From where and how are you collecting your data?:
+
+We plan to make one or more web scrapers to consider data from a number of different news sources. 
+
+Each news article we scrape will become a data point for constructing our model. Thus we want the news article as well as the organization’s political leanings, if applicable. We plan to scrape data from BBC News (liberal), Fox News (conservative), Townhall (conservative), Huffington Post (liberal), The Weekly Standard (conservative), The National Review (conservative), The Christian Science Monitor (conservative), The New American (conservative), The Daily Kos (liberal), Salon (liberal), Mother Jones (liberal), The Nation (liberal), among numerous others.
+
+Having collected this data and created a model based on its key characteristics, we will then collect data by using our web scraper on satirical news organizations such as The Onion, ClickHole, The Burowitz Report, The Daily Currant, Empire, National Report, News-Hound, The Spoof, and World News Daily Report. 
+
+Design Overview
+List the statistical and computational methods you plan to use:
+
+The design plan for our classifier is as follows. First of all, we will bucket words which appear in liberal or conservative news articles. We will then use these words as the datapoints from which to construct a support vector machine, which we hope will help us determine which buckets have a liberal leaning versus which buckets have a conservative leaning. Assuming this modeling works out as planned, we will have then confirmed our hypothesis that conservative and liberal publications use differing language. From this point, we will construct a classifier which assigns a political leaning based on the frequency of bucket appearances in any given news article combined with the SVM’s decision on whether those buckets are liberal or conservative. 
+
+We will train the SVM (or, potentially, a random forest/decision tree/KNN classifier) using a large corpus of tagged data (i.e., feature vectors computed from source texts with a known political leaning). We will then compute our success rates in classifying other feature vectors that were not used to train the model, thereby demonstrating that our classifier succeeds in separating conservative from liberal texts. We will additionally apply 10-fold cross validation here to ensure that this performance is roughly independent of which sets are chosen as training and test sets. When we are very confident that our analysis of controlled, tagged data is statistically sound, we will turn it loose on a more general setting - texts whose orientation is not stated. Where possible, we will use exterior means (e.g. internet research on the relevant authors) to determine a likely candidate for the political orientation of a given untagged piece’s author, and we will cross-reference this manually determined value with the classifier’s predictions. 
+
+Verification 
+How will you verify your project's results? In other words, how do you know that your project does well?:
+
+There are two possible outcomes to our project. The first is that our hypothesis is correct, and we can determine a set of key characteristics which can be used to differentiate liberal publications from conservative publications. In this case, our verification will be two-fold. First, we will take some articles which have not been used in the training of our model but do have an assigned political leaning. We will apply our classification scheme to these articles are determine its correctness in providing a political leaning for the article or organization behind the publication. 
+
+The second component of our verification, should our hypothesis be correct, is a little bit harder to implement. We include this process in our section of ‘Optional Features’. We would like to be able to verify the political leaning our classifier applies to a neutral piece of work retrieved from a satirical news organization by researching the background of the author to determine if they have recently worked for a liberal or conservative publication. Our methodology for achieving this remains up in the air. 
+
+If our hypothesis is not correct, our project will be a demonstration of the fact that there are no key linguistic characteristics which determine liberal from conservative publications. In this case, our verification will consist of a demonstration that our model, though it has been trained on a massive collection of liberal and conservative pieces of language, is unable to differentiate conservative publications from liberal ones. 
+
+Visualization & Presentation
+How will you visualize and communicate your results?:
+
+We want to visualize our results in three major ways, and we may add to this as our results are determined. 
+
+First, we want to be able to demonstrate conservative language or liberal language. To do this, we could use a word cloud if the key characteristics do indeed turn out to be word choices. We will also consider various metrics of linguistic complexity (e.g. the Flesch-Kincaid method) to determine if there is a significant difference in language sophistication between the two classes. We could also consider the overlap between publications with differing political leanings. We will also consider the frequency of particular characteristics in this space of political leanings, and should we find that these relationships are more complex than simple words or phrases, we will use a graph to represent the data. 
+
+Second, we want to demonstrate how our model works, ideally on an ostensibly neutral piece of writing. To do this, we want to take an article and then reduce it to just the datapoints that our model will consider. These data points will consist of key characteristics, and they may be specific words or phrases. 
+
+Third, we want to provide an analysis of our classification model by viewing its decision surface alongside our training data. Our training data will consist of hundreds of news articles with known political orientations; we can then demonstrate alongside these articles as data points the results of our classification scheme.
+
+We will also provide a presentation of our process by describing how we took it from hypothesis to test model to results. This will be a separate page on our website for the interested reader, but it will ensure that our method is not misunderstood or misinterpreted. 
+
+Schedule / timeline *
+Make sure that you plan your work so that you can avoid a big rush right before the final project deadline, and delegate different modules and responsibilities among your team members. Write this in terms of weekly deadlines:
+
+Nov. 24: 
+One week from the submission of this form, we intend to have met with our TF to discuss the feasibility of this project, and take any advice offered to us. We also plan to work on the data collection component of our project, and we intend to have a fully-functioning data scraper prepared by this date. This web scraper should be applicable on sites ranging from BBC News to Fox News to Townhall (Conservative) to Huffington Post to Upworthy to ClickHole to The Onion. 
+
+Having written the web scraper which we will use for data collection, we will then start to look at language processing. We expect that this will be the most challenging part of our project -- figuring out what characteristics define conservative or liberal writing. However, this is an exploration of our hypothesis and one of the reasons that we’re drawn to this project. So though we expect a challenge, we will also get started early and devote some time from the first week and the second week to this end. 
+
+All of this information will be included in our project notebook. 
+
+Dec. 1: 
+
+We will spend some of this week working on our language processing technique, aiming to hone our processing such that we determine a few characteristics which determine the political leanings of an organization. It is possible that our hypothesis will be false and we will not determine a set of characteristics which define liberal or conservative writing. If this is the case, then we will demonstrate this result. 
+
+Finally, we will also get started on creating an attractive webpage with which to demonstrate our results. The reason we are starting this in the second week is that we hope to have determined whether our hypothesis is true or false by this data, and will use that information to frame our findings. 
+
+All of this information will be included in our project notebook; the website, of course, will be hosted elsewhere. 
+
+Dec. 8: 
+
+Having determined the key characteristics which determine political leanings, we will create a model to interpret the political leanings of a new organization from its learnings over all of our training data, and apply it to our test data. This means that we will apply our model to sites like The Onion and Clickhole. We will also test our model against known sites, like Townhall or Huffington Post. 
+
+We will verify the correctness of our results by applying our classifier to our known data which was not used to train the model and verify that the classifier accurately prescribes a political leaning. We will attempt to verify the correctness of our results when the political leanings of the publication are unknown by reviewing the author’s past works, seeing if they have ever explicitly worked for a political, non-satiric organization. 
+
+We will also put together our data presentation as described earlier in this proposal. This will include a demonstration of conservative language, a demonstration of liberal language, and a visualization of data points which our model considers when classifying a new article as liberal or conservative. We will also demonstrate the efficacy of our process by considering a decision surface alongside our training data.  
+
+Dec. 8 - 12: We will be finished by everything by December 8th. We will use this last stretch of time as a buffer to apply the final touches of the project process book, the project webpage, and the 2-minute screencast. 
+
+
+

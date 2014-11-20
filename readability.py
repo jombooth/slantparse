@@ -1,30 +1,39 @@
 from textstat.textstat import textstat as ts
+from sklearn import svm
 
-def ascii(s):
-  return s.encode('ascii', 'ignore')
+training_articles = [["President Obama is a Great Big Phony.", "conservative"],
+                     ["President Obama wants to make himself Emperor.", "conservative"],
+                     ["While Obamacare has not afforded liberals the healthcare benefits they wanted, it is rather undeniably a step in the right direction.", "liberal"],
+                     ["The Obama administration has distinguished itself in certain fields (e.g. internet privacy issues) while falling short in others (e.g. closing Abu Ghraib)", "liberal"]]
+testing_articles = [["I'm straycoughney I'm straycoughney I have gas", "conservative"]]
 
-article = """
-A spokesman for House Speaker John Boehner (R-Ohio) labeled President Barack Obama as “Emperor Obama” on Wednesday, after the White House leaked to reporters that the president would act unilaterally on Friday to amend U.S. immigration laws.
+# transform an article into a vector
+# or readability indices
+def vecify(v):
+  return [ts.flesch_reading_ease(v),
+  # ts.smog_index(v),
+  ts.flesch_kincaid_grade(v),
+  ts.coleman_liau_index(v),
+  ts.automated_readability_index(v),
+  ts.dale_chall_readability_score(v),
+  ts.difficult_words(v),
+  ts.linsear_write_formula(v),
+  ts.gunning_fog(v)]
+  # ts.readability_consensus(v)]
 
-“If ‘Emperor Obama’ ignores the American people and announces an amnesty plan that he himself has said over and over again exceeds his constitutional authority, he will cement his legacy of lawlessness and ruin the chances for congressional action on this issue – and many others,” Boehner spokesman Michael Steel said.
+Xtrain, Ytrain = [],[]
+Xtest, Ytest = [],[]
 
-President Barack Obama walks towards a group of supporters after arriving at San Francisco International airport, on Friday, Oct. 10, 2014, in San Francisco. Obama is visiting San Francisco for fundraiser events. (AP Photo/Evan Vucci) AP Photo/Evan Vucci
-President Barack Obama is set to announce his unilateral action on immigration on Friday in Las Vegas, while Republicans say doing so would ‘cement his legacy of lawlessness.’ (AP Photo/Evan Vucci)
-It was widely reported Wednesday morning that Obama would announce his long-awaited and hotly contested executive amnesty on immigration on Friday, during a visit to Las Vegas. That plan is expected to create legal status for millions of illegal immigrants, and allow them to work.
+for (article, slant) in training_articles:
+  Xtrain.append(vecify(article))
+  # print vecify(article)
+  Ytrain.append(slant)
 
-According to the Wall Street Journal, the plan is expected to expand the deferred action program that has already given protected status to 600,000 younger illegal immigrants. It might also protect parents and spouses of U.S. citizens who are in the country illegally.
+clf = svm.SVC()
+clf.fit(Xtrain, Ytrain)
 
-For the last few weeks, Obama has been expected to loosen the rules regarding green cards, so that, for example, family members would be seen as legal residents even if just one parent actually holds a green card.
+for (article, slant) in testing_articles:
+  Xtest.append(vecify(article))
+  Ytest.append(slant)
 
-Republicans have continued to criticize Obama’s move as one that would go around Congress to rewrite immigration laws. The GOP has also said that Obama himself has said several times that he is not permitted to take certain actions without Congress.
-
-Boehner’s staff on Wednesday released a list of 22 times that Obama has said the president has limited powers, and can’t act on his own.
-
-“You don’t want a president who’s too powerful or a Congress that’s too powerful or a court that’s too powerful,” Obama said in 2008. “Everybody’s got their own role.”
-
-
-
-
-"""
-
-ts.flesch_reading_ease(article)
+print "The classifier was %.2f%% accurate." % (clf.score(Xtest, Ytest)*100)

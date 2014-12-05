@@ -1,8 +1,11 @@
 from textstat.textstat import textstat as ts
 from sklearn import svm
+from sklearn import neighbors
+from sklearn import tree
+from sklearn import ensemble
 from sklearn.feature_extraction import text
 
-import csv, enchant, string, pickle, re
+import csv, enchant, string, pickle, re, time
 from collections import Counter
 
 CHAR_LEN_BOUND = 1500
@@ -61,12 +64,19 @@ def vecify(v):
 Xtrain, Ytrain = [],[]
 Xtest, Ytest = [],[]
 
+# def csr_2_list(csr):
+#     ints = [csr[0,i] for i in range(0, csr.shape[1]) ]
+#     int_sum = sum(ints)
+#     return [float(i) / int_sum for i in ints ]
+
 def csr_2_list(csr):
     ints = [csr[0,i] for i in range(0, csr.shape[1]) ]
     int_sum = sum(ints)
-    return [float(i) / int_sum for i in ints ]
+    return ints
 
 num_libarticles, num_consarticles = 0, 0
+
+print "***VECTORIZING DOCUMENTS***"
 
 tk = text.CountVectorizer(max_features=1000)
 text_doc_matrix = tk.fit_transform([row[3] for row in rows])
@@ -83,10 +93,10 @@ for i in range(0, text_doc_matrix.shape[0]):
     else:
         Xtest.append(csr_2_list(text_doc_matrix[i]))
         Ytest.append(rows[i][1])
-    print i
+    # print i
 
-
-
+print ">>>DONE VECTORIZING DOCUMENTS<<<"
+time.sleep(2)
 
 
 
@@ -105,7 +115,8 @@ for i in range(0, text_doc_matrix.shape[0]):
 #     except:
 #         print "TRAINING SET APPEND OP ERROR: " + title
 
-clf = svm.SVC()
+#clf = svm.SVC()
+clf = svm.SVC()#(class_weight='auto')
 clf.fit(Xtrain, Ytrain)
 
 # for (_, slant, title, raw_article) in rows[1::2]:
@@ -124,5 +135,16 @@ clf.fit(Xtrain, Ytrain)
 #     except:
 #         print "TESTING SET APPEND OP ERROR: " + title
 
-print "The classifier was %.2f%% accurate." % (clf.score(Xtest, Ytest)*100)
+successes,trials = 0,0
+
+for i in range(0, len(Xtest)):
+    print "CLF SAID: " +clf.predict(Xtest[i])[0]
+    print "ACTUAL ANSWER: " + Ytest[i]
+    if Ytest[i] == clf.predict(Xtest[i])[0]:
+        successes += 1
+    trials+=1
+
+
+
+print "The classifier was %.2f%% accurate." % (float(successes)/trials*100)
 print "%d liberal articles, %d conservative articles." % (num_libarticles, num_consarticles)

@@ -12,6 +12,7 @@ try:
     pfd = open('hh_nondict_words.pickle', 'rb')
     hh_words = pickle.load(pfd)
 except:
+    print "*******RUN THIS SCRIPT A SECOND TIME AFTER IT COMPLETES********.\n\n"
     pfd = open('hh_nondict_words.pickle', 'wb')
     setpickle = True
 
@@ -71,12 +72,20 @@ def vecify(v):
 Xtrain, Ytrain = [],[]
 Xtest, Ytest = [],[]
 
+num_libarticles, num_consarticles = 0, 0
+
 for (_, slant, title, raw_article, _) in rows[::2]:
     try:
         print "ADDED TO TRAINING SET: " + title
         Xtrain.append(vecify(raw_article))
         # print vecify(article)
         Ytrain.append(slant)
+
+        if slant == 'L':
+            num_libarticles += 1
+        else:
+            num_consarticles += 1
+
     except:
         print "TRAINING SET APPEND OP ERROR: " + title
 
@@ -88,7 +97,14 @@ for (_, slant, title, raw_article, _) in rows[1::2]:
         print "ADDED TO TESTING SET: " + title
         Xtest.append(vecify(raw_article))
         Ytest.append(slant)
+
+        if slant == 'L':
+            num_libarticles += 1
+        else:
+            num_consarticles += 1
+
     except:
         print "TESTING SET APPEND OP ERROR: " + title
 
 print "The classifier was %.2f%% accurate." % (clf.score(Xtest, Ytest)*100)
+print "%d liberal articles, %d conservative articles." % (num_libarticles, num_consarticles)

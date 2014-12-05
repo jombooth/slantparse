@@ -63,11 +63,12 @@ Xtest, Ytest = [],[]
 
 def csr_2_list(csr):
     ints = [csr[0,i] for i in range(0, csr.shape[1]) ]
-    return [float(elt) / sum(ints) for i in ints ]
+    int_sum = sum(ints)
+    return [float(i) / int_sum for i in ints ]
 
 num_libarticles, num_consarticles = 0, 0
 
-tk = text.CountVectorizer()
+tk = text.CountVectorizer(max_features=1000)
 text_doc_matrix = tk.fit_transform([row[3] for row in rows])
 for i in range(0, text_doc_matrix.shape[0]):
 
@@ -76,7 +77,7 @@ for i in range(0, text_doc_matrix.shape[0]):
     else:
         num_libarticles += 1
 
-    if i % 3 == 0:
+    if i % 4 == 0:
         Xtrain.append(csr_2_list(text_doc_matrix[i]))
         Ytrain.append(rows[i][1])
     else:

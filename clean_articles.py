@@ -62,7 +62,8 @@ Xtrain, Ytrain = [],[]
 Xtest, Ytest = [],[]
 
 def csr_2_list(csr):
-    return [csr[0,i] for i in range(0, csr.shape[1]) ]
+    ints = [csr[0,i] for i in range(0, csr.shape[1]) ]
+    return [float(elt) / sum(ints) for i in ints ]
 
 num_libarticles, num_consarticles = 0, 0
 

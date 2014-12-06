@@ -8,6 +8,7 @@ from sklearn import metrics
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 
 import csv, enchant, string, pickle, re, time
 from collections import Counter
@@ -120,7 +121,8 @@ time.sleep(2)
 #         print "TRAINING SET APPEND OP ERROR: " + title
 
 
-clf = Pipeline([('clf', MultinomialNB())])
+#clf = Pipeline([('clf', GradientBoostingClassifier(max_depth = 7))])
+clf = GradientBoostingClassifier(n_estimators = 1000, max_depth = 10)
 clf.fit(Xtrain, Ytrain)
 
 #clf = svm.SVC()

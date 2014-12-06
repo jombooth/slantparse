@@ -82,7 +82,7 @@ num_libarticles, num_consarticles = 0, 0
 
 print "***VECTORIZING DOCUMENTS***"
 
-tk = text.CountVectorizer(max_features=1900, stop_words='english')
+tk = text.CountVectorizer(max_features=2400, stop_words='english')
 text_doc_matrix = tk.fit_transform([row[3] for row in rows])
 
 for i in range(0, text_doc_matrix.shape[0]):
@@ -92,7 +92,7 @@ for i in range(0, text_doc_matrix.shape[0]):
     else:
         num_libarticles += 1
 
-    if i % 4 == 0:
+    if i % 2 == 0:
         Xtrain.append(csr_2_list(text_doc_matrix[i]))
         Ytrain.append(rows[i][1])
     else:
@@ -119,9 +119,13 @@ time.sleep(2)
 #     except:
 #         print "TRAINING SET APPEND OP ERROR: " + title
 
-#clf = svm.SVC()
-clf = MultinomialNB()#(class_weight='auto')
+
+clf = Pipeline([('clf', MultinomialNB())])
 clf.fit(Xtrain, Ytrain)
+
+#clf = svm.SVC()
+#clf = MultinomialNB()#(class_weight='auto')
+#clf.fit(Xtrain, Ytrain)
 
 # for (_, slant, title, raw_article) in rows[1::2]:
 #     try:

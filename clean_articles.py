@@ -4,6 +4,10 @@ from sklearn import neighbors
 from sklearn import tree
 from sklearn import ensemble
 from sklearn.feature_extraction import text
+from sklearn import metrics
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import SGDClassifier
 
 import csv, enchant, string, pickle, re, time
 from collections import Counter
@@ -78,8 +82,9 @@ num_libarticles, num_consarticles = 0, 0
 
 print "***VECTORIZING DOCUMENTS***"
 
-tk = text.CountVectorizer(max_features=1000)
+tk = text.CountVectorizer(max_features=1900, stop_words='english')
 text_doc_matrix = tk.fit_transform([row[3] for row in rows])
+
 for i in range(0, text_doc_matrix.shape[0]):
 
     if rows[i][1] == 'C':
@@ -99,7 +104,6 @@ print ">>>DONE VECTORIZING DOCUMENTS<<<"
 time.sleep(2)
 
 
-
 # for (_, slant, title, raw_article) in rows[::2]:
 #     try:
 #         print "ADDED TO TRAINING SET: " + title
@@ -116,7 +120,7 @@ time.sleep(2)
 #         print "TRAINING SET APPEND OP ERROR: " + title
 
 #clf = svm.SVC()
-clf = svm.SVC()#(class_weight='auto')
+clf = MultinomialNB()#(class_weight='auto')
 clf.fit(Xtrain, Ytrain)
 
 # for (_, slant, title, raw_article) in rows[1::2]:
@@ -137,8 +141,10 @@ clf.fit(Xtrain, Ytrain)
 
 successes,trials = 0,0
 
+predicted = clf.predict(Xtest)
+
 for i in range(0, len(Xtest)):
-    print "CLF SAID: " +clf.predict(Xtest[i])[0]
+    print "CLF SAID: " + clf.predict(Xtest[i])[0]
     print "ACTUAL ANSWER: " + Ytest[i]
     if Ytest[i] == clf.predict(Xtest[i])[0]:
         successes += 1
@@ -148,3 +154,5 @@ for i in range(0, len(Xtest)):
 
 print "The classifier was %.2f%% accurate." % (float(successes)/trials*100)
 print "%d liberal articles, %d conservative articles." % (num_libarticles, num_consarticles)
+
+print (metrics.classification_report(Ytest, predicted))

@@ -9,6 +9,8 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+import sklearn.linear_model
+
 
 import csv, enchant, string, pickle, re, time
 from collections import Counter
@@ -122,7 +124,7 @@ time.sleep(2)
 
 
 #clf = Pipeline([('clf', GradientBoostingClassifier(max_depth = 7))])
-clf = GradientBoostingClassifier(n_estimators = 1000, max_depth = 10)
+clf = GradientBoostingClassifier(n_estimators = 1000, max_depth = 10)#, warm_start = True)
 clf.fit(Xtrain, Ytrain)
 
 #clf = svm.SVC()
@@ -162,3 +164,5 @@ print "The classifier was %.2f%% accurate." % (float(successes)/trials*100)
 print "%d liberal articles, %d conservative articles." % (num_libarticles, num_consarticles)
 
 print (metrics.classification_report(Ytest, predicted))
+
+#print clf.transform(Xtest[i], threshold = 'mean')

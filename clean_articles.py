@@ -12,7 +12,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 import sklearn.linear_model
 
 
-import csv, enchant, string, pickle, re, time
+import csv, enchant, string, cPickle, re, time
 from collections import Counter
 
 CHAR_LEN_BOUND = 1500
@@ -52,7 +52,6 @@ for i in range(0, len(raw_rows)):
     if len(article_text) > CHAR_LEN_BOUND:
         rows.append([raw_rows[i][0], raw_rows[i][1], raw_rows[i][2], article_text])
 
-
 ### CLASSIFIER CODE
 
 def vecify(v):
@@ -78,33 +77,39 @@ Xtest, Ytest = [],[]
 
 def csr_2_list(csr):
     ints = [csr[0,i] for i in range(0, csr.shape[1]) ]
-    int_sum = sum(ints)
     return ints
 
 num_libarticles, num_consarticles = 0, 0
 
-print "***VECTORIZING DOCUMENTS***"
-
-tk = text.CountVectorizer(max_features=2400, stop_words='english')
-text_doc_matrix = tk.fit_transform([row[3] for row in rows])
-
-for i in range(0, text_doc_matrix.shape[0]):
-
-    if rows[i][1] == 'C':
+for row in rows:
+    if rows[1] == 'C':
         num_consarticles += 1
     else:
         num_libarticles += 1
 
-    if i % 2 == 0:
-        Xtrain.append(csr_2_list(text_doc_matrix[i]))
-        Ytrain.append(rows[i][1])
-    else:
-        Xtest.append(csr_2_list(text_doc_matrix[i]))
-        Ytest.append(rows[i][1])
-    # print i
+print "***VECTORIZING DOCUMENTS***"
 
-print ">>>DONE VECTORIZING DOCUMENTS<<<"
-time.sleep(2)
+test_rows = rows[::2]
+train_rows = rows[1::2]
+
+# construct a CountVectorizer and give it training data
+tk_train = text.CountVectorizer(max_features=2400, stop_words='english')
+text_doc_matrix_train = tk_train.fit_transform([row[3] for row in train_rows])
+
+# construct another CountVectorizer with vocabulary based on training set's vocab
+tk_test = text.CountVectorizer(max_features=2400, stop_words='english', vocabulary = tk_train.vocabulary_)
+text_doc_matrix_test = tk_test.fit_transform([row[3] for row in test_rows])
+
+for i in range(0, text_doc_matrix_train.shape[0]):
+    Xtrain.append(csr_2_list(text_doc_matrix_train[i]))
+    Ytrain.append(train_rows[i][1])
+
+for i in range(0, text_doc_matrix_test.shape[0]):
+    Xtest.append(csr_2_list(text_doc_matrix_test[i]))
+    Ytest.append(test_rows[i][1])
+
+print ">>>DONE VECTORIZING DOCUMENTS<<<\n"
+#time.sleep(2)
 
 
 # for (_, slant, title, raw_article) in rows[::2]:
@@ -124,8 +129,27 @@ time.sleep(2)
 
 
 #clf = Pipeline([('clf', GradientBoostingClassifier(max_depth = 7))])
+print "***TRAINING CLASSIFIER***"
+
+#clf = svm.SVC()
 clf = GradientBoostingClassifier(n_estimators = 1000, max_depth = 10)#, warm_start = True)
 clf.fit(Xtrain, Ytrain)
+
+print ">>>DONE TRAINING CLASSIFIER<<<\n"
+
+# dump the classifier to be used elsewhere
+
+print "***DUMPING CLASSIFIER***"
+
+fd = open('./web/classifier', 'wb')
+cPickle.dump(clf, fd, cPickle.HIGHEST_PROTOCOL)
+fd.close()
+
+fd = open('./web/vocab', 'wb')
+cPickle.dump(tk_train.vocabulary_, fd, cPickle.HIGHEST_PROTOCOL)
+fd.close()
+
+print ">>>DONE DUMPING CLASSIFIER<<<\n"
 
 #clf = svm.SVC()
 #clf = MultinomialNB()#(class_weight='auto')

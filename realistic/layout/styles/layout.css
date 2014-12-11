@@ -16,7 +16,7 @@ File: Layout CSS
 @import url("portfolio.css");
 
 html{overflow-y:scroll;}
-body{margin:0; padding:0; font-size:12px; font-family:Georgia, "Times New Roman", Times, serif; color:#787878; background-color:#E0E0E0;}
+body{margin:0; padding:0; font-size:16px; font-family:Georgia, "Times New Roman", Times, serif; color:#787878; background-color:#E0E0E0;}
 
 .justify{text-align:justify;}
 .bold{font-weight:bold;}
@@ -33,9 +33,9 @@ a{outline:none; text-decoration:none; color:#A3443E; background-color:#E0E0E0;}
 .fl_right, .imgr{float:right;}
 
 img{display:block; margin:auto; padding:0; border:none;}
-.imgl, .imgr{border:1px solid #C7C5C8; padding:5px;}
-.imgl{margin:0 8px 8px 0; clear:left;}
-.imgr{margin:0 0 8px 8px; clear:right;}
+.imgl, .imgr{border:0px solid #C7C5C8; padding:0px;}
+.imgl{margin:0 0px 0px 0; clear:left;}
+.imgr{margin:0 0 0px 0px; clear:right;}
 
 /* ----------------------------------------------Wrapper------------------------------------- */
 
@@ -44,7 +44,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 /* ----------------------------------------------Generalise------------------------------------- */
 
-#header, #topbar, #topnav, #breadcrumb, .container, #footer, #copyright{display:block; position:relative; width:960px; margin:0 auto;}
+#header, #topbar, #topnav, #breadcrumb, .container, #footer, #copyright{display:block; position:relative; width:900px; margin:0 auto;}
 
 /* ----------------------------------------------Header------------------------------------- */
 

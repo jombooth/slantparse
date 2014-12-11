@@ -32,7 +32,7 @@ a{outline:none; text-decoration:none; color:#A3443E; background-color:#E0E0E0;}
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
 
-img{display:block; margin:0; padding:0; border:none;}
+img{display:block; margin:auto; padding:0; border:none;}
 .imgl, .imgr{border:1px solid #C7C5C8; padding:5px;}
 .imgl{margin:0 8px 8px 0; clear:left;}
 .imgr{margin:0 0 8px 8px; clear:right;}

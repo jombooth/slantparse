@@ -10,7 +10,7 @@ if (isset($_POST['data'])) {
 
     file_put_contents('escaped_string', $ipt);
 
-    $result = exec('echo "' . $_POST['data'] . '" | python quickClassify.py')
+    $result = exec('echo "' . $ipt . '" | python quickClassify.py');
 
     file_put_contents('php_result', $result, FILE_APPEND);
 

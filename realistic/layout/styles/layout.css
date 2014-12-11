@@ -51,7 +51,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 #header{text-align:center;}
 #header h1, #header p{margin:0; padding:0; list-style:none; line-height:normal;}
 #header h1 a{font-size:120px; color:#292929; background-color:#E0E0E0;}
-#header p{margin-top:20px; font-size:20px; color:#4A4A4A; background-color:#E0E0E0;}
+#header p{margin-top:0px; font-size:20px; color:#4A4A4A; background-color:#E0E0E0;}
 
 /* ----------------------------------------------Topbar------------------------------------- */
 

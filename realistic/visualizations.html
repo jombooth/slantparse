@@ -60,19 +60,10 @@ jQuery(function () {
 <div class="wrapper">
   <div class="container">
     <div class="whitebox" id="hpage_services">
-      <p>We use concepts from machine learning and statistics to compute the political leaning of a piece of text. This works by creating a classifier which looks at features of the text, like particular words and the frequency with which those words appear. These words and frequencies are thought of as features. For a given article, we look at the features which are indicative of a conservative or a liberal slant, and we then predict whether we think the article is conservative or liberal based on these features.</p>
-      <p>You can try it yourself! Enter an article in the text box below and we'll use our classifier to decide whether we think it's conservative or liberal. </p>
-      <div id="respond">
-          <form action="#" method="post">
-            <p>
-              <textarea name="comment" id="comment" cols="100%" rows="30"></textarea>
-              <label for="comment" style="display:none;"><small>Comment (required)</small></label>
-            </p>
-            <p>
-              <input name="submit" type="submit" id="submit" value="Submit Article" />
-            </p>
-          </form>
-        </div>
+      <p>The data we trained our classifier with consisted of hundreds of articles scraped from five liberal and five conservative sources. Here's a quick tour of some of the visualizations we used to explore the data.</p>
+      <center>
+      <img class="imgr" src="../static/wordcloud_all_data.png" alt="" width="125" height="125" />
+      </center>
 
       <div class="clear"></div>
     </div>

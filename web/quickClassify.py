@@ -55,4 +55,4 @@ def csr_2_list(csr):
     return ints
 
 
-print clf.predict(csr_2_list(my_row))
+print "C: %2.2f" % (100*clf.predict_proba(csr_2_list(my_row))[0][0]) + ", L: %2.2f " % (100*clf.predict_proba(csr_2_list(my_row))[0][1])

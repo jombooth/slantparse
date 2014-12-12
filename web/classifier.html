@@ -35,7 +35,7 @@ function logdata(result, status, xhr) {
         document.getElementById("lib").innerHTML = gen_lib_svg(libval);
     }
     else if (result[0] == 'I') {
-        alert("Cannot classify strings shorter than 100 characters.");
+        alert("Cannot classify strings shorter than 1000 characters.");
     }
     else if (result[0] == 'Q') {
 	alert("Input was too large. Smaller than 1MB please!");

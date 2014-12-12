@@ -44,9 +44,9 @@ var replogo = "<center><svg opacity='REPLACE_ME' xmlns:svg='http://www.w3.org/20
 </svg>";
 
 function gen_cons_svg(f) {
-    return replogo.replace('REPLACE_ME', f) + "</br></br>Probability of conservative article: " + f + "</center>";
+    return replogo.replace('REPLACE_ME', f) + "</br></br>Probability of conservative article: " + (f*100).toFixed(1) + "%</center>";
 }
 
 function gen_lib_svg(f) {
-    return demlogo.replace('REPLACE_ME', f) + "</br></br>Probability of liberal article: " + f + "</center>";
+    return demlogo.replace('REPLACE_ME', f) + "</br></br>Probability of liberal article: " + (f*100).toFixed(1) + "%</center>";
 }

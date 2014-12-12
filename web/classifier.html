@@ -20,6 +20,24 @@ Licence URI: http://www.os-templates.com/template-terms
 jQuery(function () {
     jQuery('ul.nav').superfish();
 });
+
+function logdata(result, status, xhr) {
+    console.log(result);
+    console.log("got here from logdata");
+}
+
+function relay_to_classifier() {
+    var my_data = {data : document.getElementById('comment').value};
+    console.log(my_data);
+
+    jQuery.ajax({
+        type: "POST",
+        url: "submit_text.php",
+        dataType: "text",
+        data: my_data,
+        success: logdata});
+}
+
 </script>
 <!-- / Superfish Menu -->
 </head>
@@ -63,13 +81,13 @@ jQuery(function () {
     <div class="whitebox" id="hpage_services">
       <p>You can try our classifier yourself! Enter an article in the text box below and we'll use our classifier to decide whether we think it's conservative or liberal. </p>
       <div id="respond">
-          <form action="#" method="post">
+          <form method="post" action="javascript:void(0);">
             <p>
               <textarea name="comment" id="comment" cols="100%" rows="30"></textarea>
               <label for="comment" style="display:none;"><small>Comment (required)</small></label>
             </p>
             <p>
-              <input name="submit" type="submit" id="submit" value="Submit Article" />
+              <input name="submit" type="submit" onClick="relay_to_classifier()" id="submit" value="Submit Article" />
             </p>
           </form>
         </div>

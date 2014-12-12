@@ -16,14 +16,30 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- Superfish Menu -->
 <script type="text/javascript" src="layout/scripts/superfish/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="layout/scripts/superfish/superfish.js"></script>
+<script type="text/javascript" src="svg_generator.js"></script>
 <script type="text/javascript">
 jQuery(function () {
     jQuery('ul.nav').superfish();
 });
 
 function logdata(result, status, xhr) {
-    console.log(result);
-    console.log("got here from logdata");
+    console.log("result was: " + result);
+
+    if (result.split(",").length == 2) {
+        var consval = parseFloat(result.split(",")[0].split(" ")[1]) / 100;
+        var libval = parseFloat(result.split(",")[1].split(" ")[2]) / 100;
+      
+        console.log("C"+consval+"L"+libval);
+
+        document.getElementById("cons").innerHTML = gen_cons_svg(consval);
+        document.getElementById("lib").innerHTML = gen_lib_svg(libval);
+    }
+    else if (result[0] == 'I') {
+        alert("Cannot classify strings shorter than 100 characters.");
+    }
+    else if (result[0] == 'Q') {
+	alert("Input was too large. Smaller than 1MB please!");
+    }
 }
 
 function relay_to_classifier() {
@@ -95,12 +111,12 @@ function relay_to_classifier() {
       <table>
         <tr>
           <td>
-            <div>
+            <div id="lib">
             hello
             </div>
           </td>
           <td>
-            <div>
+            <div id="cons">
             heya
             </div>
           </td>

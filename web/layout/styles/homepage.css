@@ -11,7 +11,7 @@ File: Homepage CSS
 #hpage_services{}
 #hpage_services .block{display:inline; float:left; width:280px; margin:0 30px 0 0; padding:0;}
 #hpage_services .last{margin-right:0;}
-#hpage_services img{display:inline; float:left;}
+#hpage_services img{display:inline; float:none;}
 #hpage_services strong{float:left; margin:8px 0 0 10px; padding:0; font-size:22px; font-weight:normal; color:#4A4A4A; background-color:#FFF;}
 #hpage_services p{display:block; margin:0; padding:10px 0 0 0; clear:both; line-height:1.6em;}
 #hpage_services .spacer{clear:both; padding:8px 0; line-height:normal;}

@@ -66,21 +66,33 @@ jQuery(function () {
         <p>The data we trained our classifier with consisted of hundreds of articles scraped from five liberal and five conservative sources. Here's a quick tour of some of the visualizations we used to explore the data.</p>
 
         <p>For our first visual data exploration, we removed all of the unimportant words, like "the" or "and", from all of our data. We then created a word cloud of the words that are most frequently used in the news articles as of the week of December 8th, 2014. The bigger the word's representation in the cloud below, the more times it appeared throughout our entire dataset.</p>
-        &nbsp;
-        <img class="imgr" src="./static/wordcloud_all_data.png"/>
-        &nbsp;
-        &nbsp;
-        <p>For our second visual data exploration, we created another word cloud. This word cloud represents the features which our classifier uses when considering an article. The higher the importance of the feature to the classifier, the larger the representation of the word in the word cloud below. This visualization is particularly interesting, as we see a lot of charged and emotional words, like "guilty", "voters", "foreign", "control", "obama", "income", "taxes", and "god."</p>
-        &nbsp;
-        &nbsp;
-        <img class="imgr" src="./static/wordcloud_classifier.png"/>
-        &nbsp; 
+        <center>
+          <img class="imgr" src="./static/wordcloud_all_data.png"/>
+        </center>
+        <p>For our second visual data exploration, we created another word cloud. This word cloud represents the features which our classifier uses when considering an article. The higher the importance of the feature to the classifier, the larger the representation of the word in the word cloud below. This visualization is particularly interesting, as we see a lot of charged and emotional words, like "guilty", "voters", "foreign", "control", "obama", "income", "taxes", and "god."</p><br>
+        <center>
+          <img class="imgr" src="./static/wordcloud_classifier.png"/>
+        </center>
         <p> After making word clouds, we decided to look at how individual features stacked up against their respective level of importances. To explore this, we used bar graph, and we say the relative feature importances of the top ten features. 'Photos' was twice as important to our classifier as words such as 'guilty' or 'voters'. This is interesting because while the two latter words are clearly political, 'photos' seems like a word that we as humans wouldn't use when deciding whether a source was conservative or liberal. 
-        </p>
-        <img class="imgr" src="./static/features_bar.png"/>
-        <img class="imgl" src="./static/decision_surface_1.png"/>
-        <img class="imgl" src="./static/decision_surface_2.png"/>
+        </p><br>
+        <center>
+          <img class="imgr" src="./static/features_bar.png"/>
+        </center>
+        <p> We then looked at decision surfaces. Decision surfaces are used to visualize a vector space. That means that the decision surfaces below range from white to red, where red represents the most conservative and white represents the most liberal. On top of this color map, dots represent articles that we used to train our classifier. Blue in this case means liberal, and red means conservative. 
 
+        There are several interesting modifications to these decision surfaces. The main modification is that each of the features on the axes has an integer representation, but because this meant that all articles were located on top of one another, we added a small degree of randomness to the x-coordinate of each article point represented. 
+
+        In the first decision surface, we compared the classifier's top two features: the frequency of the usage of the word 'photos' versus the frequency of the word 'time.' While neither of these words appear to be particularly political, our classifier determined that articles with a greater frequency usage of the word 'time' were more often conservative.
+        </p><br>
+        <center>
+          <img class="imgr" src="./static/decision_surface_1.png"/>
+        </center>
+        <p>
+        After plotting the top two features of the classifier as a decision surface, we then looked at the next two top features: the frequency of the word 'foreign' versus the frequency of the word 'just' in the data. Both of these words seem more like words we as humans would use when trying to classify an article as liberal or conservative; it seems quite intuitive that a conservative article is more likely to use the word foreign. 
+        </p><br>
+        <center>
+          <img class="imgr" src="./static/decision_surface_2.png"/>
+        </center>
       <div class="clear"></div>
     </div>
     <!-- ####################################################################################################### 

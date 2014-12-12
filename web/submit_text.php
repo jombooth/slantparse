@@ -1,6 +1,6 @@
 <?php
 
-file_put_contents('php_log', "got here", FILE_APPEND);
+//file_put_contents('php_log', "got here", FILE_APPEND);
 
 if (isset($_POST['data'])) {
 
@@ -22,7 +22,7 @@ if (isset($_POST['data'])) {
     $result = exec($query);
 
     file_put_contents('php_query', $query);
-    file_put_contents('php_result', $result, FILE_APPEND);
+    file_put_contents('php_result', $result);
 
     print $result;
 }

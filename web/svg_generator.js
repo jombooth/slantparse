@@ -1,5 +1,5 @@
-var demlogo = "<svg fill-opacity='REPLACE_ME' xmlns='&ns_svg;' xmlns:xlink='&ns_xlink;' xmlns:a='http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/' \
-     width='365' height='474' viewBox='-0.213 -0.116 365 474' xml:space='preserve'> \
+var demlogo = "<svg opacity='REPLACE_ME' xmlns='&ns_svg;' xmlns:xlink='&ns_xlink;' xmlns:a='http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/' \
+     width='240' height = '240' viewBox='-0.213 -0.116 365 474' xml:space='preserve'> \
     <defs> \
     </defs> \
     <g> \
@@ -13,7 +13,7 @@ var demlogo = "<svg fill-opacity='REPLACE_ME' xmlns='&ns_svg;' xmlns:xlink='&ns_
             c-1.5,3.5,17.75,5.333,24.364,0.821c-1.167,0.796,5.762-14.973,6.501-13.891c0.742,1.082-5.918,20.723-5.115,21.736 \
             c3.833,4.834,21.232,4.941,26.235,0.495c0,0-1.175-10.967,1.124-15.358c8.923-17.04,23.448-33.979,33.61-49.227 \
             c9.189-13.787,10.703-25.237,15.618-43.796c28.565-23.942,35.309-42.1,51.944-79.104c8.487-22.747,18.562-25.011,20.369-26.142 \
-            c12.085,2.126,15.619,2.379,26.253-1.13c13.129-4.981,15.733-9.961,37.233-33.497c7.014,3.017,15.655,7.192,25.462,8.825" \
+            c12.085,2.126,15.619,2.379,26.253-1.13c13.129-4.981,15.733-9.961,37.233-33.497c7.014,3.017,15.655,7.192,25.462,8.825 \
             c17.473,2.908,37.896,1.463,54.094-2.488c1.377-15.865-7.899-19.035-15.392-26.029c-10.863,1.809-15.826,6.467-25.8,9.167 \
             c-16.974-3.85-17.702-23.265-36.327-25.462c-4.414,3.735-5.279,5.473-7.471,7.809c0,0-11.881,14.259-14.598,14.938 \
             c-2.715,0.679-13.197,0.083-13.197,0.083c3.1-5.401,25.596-20.11,24.811-37.346c6.507-1.644,18.094-2.288,27.432-1.101 \
@@ -32,7 +32,7 @@ var demlogo = "<svg fill-opacity='REPLACE_ME' xmlns='&ns_svg;' xmlns:xlink='&ns_
     </g> \
 </svg>";
 
-var replogo = "<svg fill-opacity='REPLACE_ME' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.0' width='600' height='521' id='svg2'> \
+var replogo = "<svg opacity='REPLACE_ME' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.0' width='240' viewBox='-0.213 -0.116 600 550' id='svg2'> \
   <defs id='defs4'/> \
   <g id='layer1'> \
     <path d='M 25.556904,181.24351 C 25.559397,217.70783 26.8076,220.64466 48.107114,220.5811 C 69.176149,220.51593 485.02517,220.07625 485.33062,220.07999 C 501.60624,220.28225 505.95354,216.32602 505.87636,188.50969 C 505.47315,42.934967 413.17215,9.9284822 264.08801,10.864154 C 136.30486,11.666139 25.547142,40.413678 25.556904,181.24351 z ' style='fill:#1404bd;fill-opacity:1;fill-rule:evenodd;stroke:none' id='back'/> \
@@ -43,10 +43,10 @@ var replogo = "<svg fill-opacity='REPLACE_ME' xmlns:svg='http://www.w3.org/2000/
   </g> \
 </svg>";
 
-function get_cons_svg(f) {
+function gen_cons_svg(f) {
     return replogo.replace('REPLACE_ME', f);
 }
 
-function get_lib_svg(f) {
+function gen_lib_svg(f) {
     return demlogo.replace('REPLACE_ME', f);
 }

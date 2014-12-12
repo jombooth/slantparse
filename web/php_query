@@ -1,0 +1,1 @@
+echo "George dubya ' sure bunged up this one" | python quickClassify.py
